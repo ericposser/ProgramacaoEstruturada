@@ -5,10 +5,9 @@ using namespace std;
 void parimpar(int n){
   if(n % 2 == 0){
     cout << "numero par";
-  }else{
+  }else if(n % 2 == 1){
     cout << "numero impar";
   }
-  
 }
 
 int main(){
