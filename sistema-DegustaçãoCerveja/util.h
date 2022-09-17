@@ -47,12 +47,6 @@ bool ValidaNota(int nota){
 //     return false;
 // }
 
-bool ValidaData(string data){
-    if(data.length() != 10){
-        return true;
-    }
-    return false;
-}
 
 bool validaNomeCompleto(string nome) {
     for (int i = 0; i < nome.length(); i++) {
@@ -87,10 +81,10 @@ bool inserir(Degustacao vetor[], int *qtd) {
             vetor[i].tipo = tipo;
 
             //recebendo a data da degustação
-            do{
+            
                 cout << "Entre com a data da degustacao [dd/mm/aaaa]: "; 
                 cin >> vetor[i].data;
-            }while (!ValidaData(vetor[i].data));      
+            
 
             //recebendo a nota da cerveja
             do{
