@@ -1,3 +1,6 @@
+// arrumar o marca e modelo do inserir que esta pegando os 2 juntos
+// fazer o numero de serviço incrementando 1 por 1 automatico
+
 #include <iostream> //cin e cout
 #include <string> 
 #include <stdio.h>
@@ -16,10 +19,10 @@ int main() {
     //montar o menu
     do {
         system("cls");
-        cout << "Ordens de serviços - MENU\n";
-        cout << "1 - Cadastrar serviço\n";
-        cout << "2 - Listar serviços\n";
-        cout << "3 -  Pesquisar/Atualizar ordem de serviço (por número da ordem ou por contato do dono)\n";
+        cout << "Ordens de servicos - MENU\n";
+        cout << "1 - Cadastrar servico\n";
+        cout << "2 - Listar servicos\n";
+        cout << "3 - Pesquisar/Atualizar ordem de servico (por numero da ordem ou por contato do dono)\n";
         cout << "4 - Sair\n";
         cout << "Opcao: ";
         cin >> opcao;
@@ -28,19 +31,19 @@ int main() {
         switch (opcao)
         {
             case 1:
-                cout << "Cadastrar serviço\n";
+                cout << "Cadastrar servico\n";
 
                 if (inserir(vetor, &qtdCliente)) {
-                    cout << "Serviço cadastrado com sucesso\n";
+                    cout << "Servico cadastrado com sucesso\n";
                 } else {
                     cout << "Problemas para cadastrar. Falta de espaco\n";
                 }
                 break;
             case 2:
-                cout << "Listar serviços\n";
+                cout << "Listar servicos\n";
 
                 if (listar(vetor, qtdCliente)) {
-                    cout << "Serviços cadastrados\n";
+                    cout << "Servicos cadastrados\n";
                 } else {
                     cout << "Estrutura vazia\n";
                 }

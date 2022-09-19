@@ -57,20 +57,85 @@ bool validaNomeCompleto(string nome) {
 }
 
 bool validaData(string data){
-    if (data == "" || data.length() != 10 || data[2] != '/' || data[5] != '/'){
-        return false;
+    if(data.length() == 10){
+        return true;
     }
+    return false;
+}
 
-bool inserir(Loja vetor[], int *qtd) {
+bool validaHora(string hora){
+    if(hora.length() == 5){
+        return true;
+    }
+    return false;
+}
+
+bool inserir(Loja vetor[], int *qtd){
     if (*qtd == TAM) {
         return false;
     } /*else*/
-    string NomeDono;
+    string NomeDono, Marca, Modelo, Descricao, ContatoDono;
     for (int i = 0; i < TAM; i++) {
         if (vetor[i].NomeDono == "") {
             *qtd = *qtd + 1; //(*qtd)++
             
-           
+
+            //numero do serviço
+
+            //data do serviço  
+            do{
+                cout << "Entre com a data do servico [dd/mm/aaaa]: ";
+                cin >> vetor[i].Data;   
+            }while (!validaData(vetor[i].Data));
+ 
+
+            //hora do serviço
+            do{
+            cout << "Entre com a hora do servico [hh:mm]: ";
+            cin >> vetor[i].Hora;
+            }while (!validaHora(vetor[i].Hora));
+
+            //marca do produto
+            cout << "Entre com a marca do telefone: ";
+            getline(cin, Marca);
+            Marca = paraMaiusculo(Marca);
+            vetor[i].Marca = Marca;
+
+            //modelo do produto
+            cout << "Entre com o modelo do telefone: ";
+            getline(cin, Modelo);
+            Modelo = paraMaiusculo(Modelo);
+            vetor[i].Modelo = Modelo;
+
+            //descrição
+            cout << "Entre com a descricao do problema: ";
+            getline(cin, Descricao);
+            Descricao = paraMaiusculo(Descricao);
+            vetor[i].Descricao = Descricao;
+
+            //nome do dono
+            do {
+                cout << "Nome completo do dono: ";
+                getline(cin, NomeDono);
+                NomeDono = paraMaiusculo(NomeDono);
+            } while (!validaNomeCompleto(NomeDono));
+            vetor[i].NomeDono = NomeDono;
+
+            //contato do dono
+            cout << "Entre com o contato do dono: ";
+            getline(cin, vetor[i].ContatoDono);
+
+            //previsão da data de entrega
+            do{
+                cout << "Entre com a previsao da data de entrega do servico [dd/mm/aaaa]: ";
+                cin >> vetor[i].DataEntrega;   
+            }while (!validaData(vetor[i].DataEntrega));
+
+            //previsão hora entrega
+            do{
+            cout << "Entre com a  previsao da hora de entrega do servico [hh:mm]: ";
+            cin >> vetor[i].HoraEntrega;
+            }while (!validaHora(vetor[i].HoraEntrega));
             break;
         }
     }
@@ -78,112 +143,114 @@ bool inserir(Loja vetor[], int *qtd) {
     return true;
 }
 
-bool listar(Agenda vetor[], int qtd) {
+bool listar(Loja vetor[], int qtd) {
     if (qtd == 0) return false;
 
     for (int i = 0; i < qtd; i++) {
-        if (vetor[i].nome != "") {
-            cout << "Nome: " << vetor[i].nome << endl;
-            cout << "Email: " << vetor[i].email << endl;
-            cout << "Telefone: " << vetor[i].telefone << endl;
+        if (vetor[i].NomeDono != "") {
+            cout << "Data do servico: " << vetor[i].Data << endl;
+            cout << "Hora do servico: " << vetor[i].Hora << endl;
+            cout << "Marca do telefone: " << vetor[i].Marca << endl;
+            cout << "Modelo do telefone: " << vetor[i].Modelo << endl;
+            cout << "Descricao: " << vetor[i].Descricao<< endl;
+            cout << "Nome do dono: " << vetor[i].NomeDono << endl;
+            cout << "Contato do dono: " << vetor[i].ContatoDono << endl;
+            cout << "Previsao da data de entrega: " << vetor[i].DataEntrega << endl;
+            cout << "Previsao do horario de entrega: " << vetor[i].HoraEntrega << endl;
             cout << "--------------------------------------" << endl;
         }
     }
     return true;
 }
 
-bool remover(Agenda vetor[], int *qtd) {
-    if (*qtd == 0) return false;
-    string nomePesquisa;
-    cout << "Digite o nome completo: ";
-    getline(cin,nomePesquisa);
-    nomePesquisa = paraMaiusculo(nomePesquisa);
-    int confirma;
 
-    for (int i = 0; i < *qtd; i++) {
-        if (vetor[i].nome != "") {
-            if (vetor[i].nome == nomePesquisa) {
-                cout << "Nome: " << vetor[i].nome << endl;
-                cout << "Email: " << vetor[i].email << endl;
-                cout << "Telefone: " << vetor[i].telefone << endl;
-                cout << "1 - Confirma a remocao; 2 - Aborta a remocao!\n";
-                cin >> confirma;
 
-                if (confirma == 1) {
-                    vetor[i].nome = "";
-                    vetor[i].email = "";
-                    vetor[i].telefone = "";
-                    *qtd = *qtd - 1;
-                    return true;
-                } 
-            }
-        }
-    }
-    return false;
-}
-
-bool PesquisarAtualizar(Agenda vetor[], int qtd) {
+bool PesquisarAtualizar(Loja vetor[], int qtd) {
     if (qtd == 0) return false;
-    string nomePesquisa;
-    string nome, email, telefone;
-    cout << "Digite o nome completo: ";
-    getline(cin,nomePesquisa);
-    nomePesquisa = paraMaiusculo(nomePesquisa);
+    string Pesquisa;
+    string NomeDono, Marca, Modelo, Descricao, ContatoDono;
+    cout << "Digite o contato do dono do telefone: ";
+    getline(cin,Pesquisa);
+    Pesquisa = paraMaiusculo(Pesquisa);
     int confirma;
 
     for (int i = 0; i < qtd; i++) {
-        if (vetor[i].nome != "") {
-            if (vetor[i].nome == nomePesquisa) {
-                cout << "Nome: " << vetor[i].nome << endl;
-                cout << "Email: " << vetor[i].email << endl;
-                cout << "Telefone: " << vetor[i].telefone << endl;
+        if (vetor[i].ContatoDono != "") {
+            if (vetor[i].ContatoDono == Pesquisa) {
+                 cout << "Data do servico: " << vetor[i].Data << endl;
+                cout << "Hora do servico: " << vetor[i].Hora << endl;
+                cout << "Marca do telefone: " << vetor[i].Marca << endl;
+                cout << "Modelo do telefone: " << vetor[i].Modelo << endl;
+                cout << "Descricao: " << vetor[i].Descricao<< endl;
+                cout << "Nome do dono: " << vetor[i].NomeDono << endl;
+                cout << "Contato do dono: " << vetor[i].ContatoDono << endl;
+                cout << "Previsao da data de entrega: " << vetor[i].DataEntrega << endl;
+                cout << "Previsao do horario de entrega: " << vetor[i].HoraEntrega << endl;
+
                 cout << "1 - Confirma a atualizacao; 2 - Aborta a atualizacao!\n";
                 cin >> confirma;
                 fflush(stdin);
 
                 if (confirma == 1) {
-                    //recebendo um nome
-                    do {
-                        cout << "Entre com o nome completo: ";
-                        getline(cin, nome);                        
-                        nome = paraMaiusculo(nome);
-                    } while (!validaNomeCompleto(nome));
-                    vetor[i].nome = nome;
+                     //numero do serviço
 
-                    //recebendo um email
-                    cout << "Entre com o email: ";
-                    getline(cin, email);
-                    email = paraMaiusculo(email);
-                    vetor[i].email = email;
+            //data do serviço  
+            do{
+                cout << "Entre com a data do servico [dd/mm/aaaa]: ";
+                cin >> vetor[i].Data;   
+            }while (!validaData(vetor[i].Data));
+ 
 
-                    //recebendo um telefone
-                    cout << "Entre com o numero de telefone: ";
-                    getline(cin, vetor[i].telefone);
-                        break;
+            //hora do serviço
+            do{
+            cout << "Entre com a hora do servico [hh:mm]: ";
+            cin >> vetor[i].Hora;
+            }while (!validaData(vetor[i].Data));
+
+            //marca do aparelho
+            cout << "Entre com a marca do telefone: ";
+            getline(cin, Marca);
+            Marca = paraMaiusculo(Marca);
+            vetor[i].Marca = Marca;
+
+            //modelo do aparelho
+            cout << "Entre com o modelo do telefone: ";
+            getline(cin, Modelo);
+            Modelo = paraMaiusculo(Modelo);
+            vetor[i].Modelo = Modelo;
+
+            //descrição
+            cout << "Entre com a descricao do problema: ";
+            getline(cin, Descricao);
+            Descricao = paraMaiusculo(Descricao);
+            vetor[i].Descricao = Descricao;
+
+            //nome do dono
+            do {
+                cout << "Nome completo do dono: ";
+                getline(cin, NomeDono);
+                NomeDono = paraMaiusculo(NomeDono);
+            } while (!validaNomeCompleto(NomeDono));
+            vetor[i].NomeDono = NomeDono;
+
+            //contato do dono
+            cout << "Entre com o contato do dono: ";
+            getline(cin, vetor[i].ContatoDono);
+
+            //previsão da data de entrega
+            do{
+                cout << "Entre com a previsao da data de entrega do servico [dd/mm/aaaa]: ";
+                cin >> vetor[i].DataEntrega;   
+            }while (!validaData(vetor[i].DataEntrega));
+
+            //previsão hora entrega
+            do{
+            cout << "Entre com a  previsao da hora de entrega do servico [hh:mm]: ";
+            cin >> vetor[i].HoraEntrega;
+            }while (!validaHora(vetor[i].HoraEntrega));
+            break;
                     return true;
                 }                 
-            }
-        }
-    }
-    return true;
-
-
-}
-
-bool pesquisar(Agenda vetor[], int qtd) {
-    if (qtd == 0) return false;
-    string nomePesquisa;
-    cout << "Digite o nome completo: ";
-    getline(cin,nomePesquisa);
-    nomePesquisa = paraMaiusculo(nomePesquisa);
-
-    for (int i = 0; i < qtd; i++) {
-        if (vetor[i].nome != "") {
-            if (vetor[i].nome.find(nomePesquisa) != -1) {
-                cout << "Nome: " << vetor[i].nome << endl;
-                cout << "Email: " << vetor[i].email << endl;
-                cout << "Telefone: " << vetor[i].telefone << endl;
-                cout << "--------------------------------------" << endl;
             }
         }
     }
