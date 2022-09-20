@@ -1,6 +1,3 @@
-// arrumar o marca e modelo do inserir que esta pegando os 2 juntos
-// fazer o numero de serviço incrementando 1 por 1 automatico
-
 #include <iostream> //cin e cout
 #include <string> 
 #include <stdio.h>
