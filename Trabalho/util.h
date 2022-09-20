@@ -31,6 +31,7 @@ string pegarPrimeiroNome(string nome) {
     return primeiroNome;
 }
 
+
 void inicializar(Loja vetor[], int n) {
     for (int i = 0; i < n; i++) {
         vetor[i].NumeroServico = 0;
@@ -74,38 +75,27 @@ bool inserir(Loja vetor[], int *qtd){
     if (*qtd == TAM) {
         return false;
     } /*else*/
-    string NomeDono, Marca, Modelo, Descricao, ContatoDono;
+    string NomeDono, nomeMarca, nomeModelo, Descricao, ContatoDono;
     for (int i = 0; i < TAM; i++) {
         if (vetor[i].NomeDono == "") {
             *qtd = *qtd + 1; //(*qtd)++
             
-
-            //numero do serviço
-
-            //data do serviço  
-            do{
-                cout << "Entre com a data do servico [dd/mm/aaaa]: ";
-                cin >> vetor[i].Data;   
-            }while (!validaData(vetor[i].Data));
- 
-
-            //hora do serviço
-            do{
-            cout << "Entre com a hora do servico [hh:mm]: ";
-            cin >> vetor[i].Hora;
-            }while (!validaHora(vetor[i].Hora));
+           //numero de serviço
+            for(int n = 0 ; n < 10; n++){
+                vetor[i].NumeroServico = rand() % 10;
+            }
 
             //marca do produto
             cout << "Entre com a marca do telefone: ";
-            getline(cin, Marca);
-            Marca = paraMaiusculo(Marca);
-            vetor[i].Marca = Marca;
+            getline(cin, nomeMarca); 
+            nomeMarca = paraMaiusculo(nomeMarca);
+            vetor[i].Marca = nomeMarca;   
 
             //modelo do produto
             cout << "Entre com o modelo do telefone: ";
-            getline(cin, Modelo);
-            Modelo = paraMaiusculo(Modelo);
-            vetor[i].Modelo = Modelo;
+            getline(cin, nomeModelo);
+            nomeModelo = paraMaiusculo(nomeModelo);
+            vetor[i].Modelo = nomeModelo;
 
             //descrição
             cout << "Entre com a descricao do problema: ";
@@ -124,6 +114,20 @@ bool inserir(Loja vetor[], int *qtd){
             //contato do dono
             cout << "Entre com o contato do dono: ";
             getline(cin, vetor[i].ContatoDono);
+
+            //data do serviço  
+            do{
+                cout << "Entre com a data do servico [dd/mm/aaaa]: ";
+                cin >> vetor[i].Data;   
+            }while (!validaData(vetor[i].Data));
+ 
+            
+            //hora do serviço
+            do{
+            cout << "Entre com a hora do servico [hh:mm]: ";
+            cin >> vetor[i].Hora;
+            }while (!validaHora(vetor[i].Hora));
+
 
             //previsão da data de entrega
             do{
@@ -148,6 +152,7 @@ bool listar(Loja vetor[], int qtd) {
 
     for (int i = 0; i < qtd; i++) {
         if (vetor[i].NomeDono != "") {
+            cout << "Numero da ordem: " << vetor[i].NumeroServico << endl;
             cout << "Data do servico: " << vetor[i].Data << endl;
             cout << "Hora do servico: " << vetor[i].Hora << endl;
             cout << "Marca do telefone: " << vetor[i].Marca << endl;
@@ -168,8 +173,8 @@ bool listar(Loja vetor[], int qtd) {
 bool PesquisarAtualizar(Loja vetor[], int qtd) {
     if (qtd == 0) return false;
     string Pesquisa;
-    string NomeDono, Marca, Modelo, Descricao, ContatoDono;
-    cout << "Digite o contato do dono do telefone: ";
+    string NomeDono, nomeMarca, nomeModelo, Descricao, ContatoDono;
+    cout << "Digite o contato do dono do telefone ou o numero de ordem: ";
     getline(cin,Pesquisa);
     Pesquisa = paraMaiusculo(Pesquisa);
     int confirma;
@@ -177,7 +182,8 @@ bool PesquisarAtualizar(Loja vetor[], int qtd) {
     for (int i = 0; i < qtd; i++) {
         if (vetor[i].ContatoDono != "") {
             if (vetor[i].ContatoDono == Pesquisa) {
-                 cout << "Data do servico: " << vetor[i].Data << endl;
+                cout << "Numero da ordem: " << vetor[i].NumeroServico << endl;
+                cout << "Data do servico: " << vetor[i].Data << endl;
                 cout << "Hora do servico: " << vetor[i].Hora << endl;
                 cout << "Marca do telefone: " << vetor[i].Marca << endl;
                 cout << "Modelo do telefone: " << vetor[i].Modelo << endl;
@@ -194,30 +200,22 @@ bool PesquisarAtualizar(Loja vetor[], int qtd) {
                 if (confirma == 1) {
                      //numero do serviço
 
-            //data do serviço  
-            do{
-                cout << "Entre com a data do servico [dd/mm/aaaa]: ";
-                cin >> vetor[i].Data;   
-            }while (!validaData(vetor[i].Data));
- 
+            //numero de serviço
+            for(int n = 0 ; n < 10; n++){
+                vetor[i].NumeroServico = rand() % 10;
+            }
 
-            //hora do serviço
-            do{
-            cout << "Entre com a hora do servico [hh:mm]: ";
-            cin >> vetor[i].Hora;
-            }while (!validaData(vetor[i].Data));
-
-            //marca do aparelho
+            //marca do produto
             cout << "Entre com a marca do telefone: ";
-            getline(cin, Marca);
-            Marca = paraMaiusculo(Marca);
-            vetor[i].Marca = Marca;
+            getline(cin, nomeMarca); 
+            nomeMarca = paraMaiusculo(nomeMarca);
+            vetor[i].Marca = nomeMarca;   
 
-            //modelo do aparelho
+            //modelo do produto
             cout << "Entre com o modelo do telefone: ";
-            getline(cin, Modelo);
-            Modelo = paraMaiusculo(Modelo);
-            vetor[i].Modelo = Modelo;
+            getline(cin, nomeModelo);
+            nomeModelo = paraMaiusculo(nomeModelo);
+            vetor[i].Modelo = nomeModelo;
 
             //descrição
             cout << "Entre com a descricao do problema: ";
@@ -236,6 +234,20 @@ bool PesquisarAtualizar(Loja vetor[], int qtd) {
             //contato do dono
             cout << "Entre com o contato do dono: ";
             getline(cin, vetor[i].ContatoDono);
+
+            //data do serviço  
+            do{
+                cout << "Entre com a data do servico [dd/mm/aaaa]: ";
+                cin >> vetor[i].Data;   
+            }while (!validaData(vetor[i].Data));
+ 
+            
+            //hora do serviço
+            do{
+            cout << "Entre com a hora do servico [hh:mm]: ";
+            cin >> vetor[i].Hora;
+            }while (!validaHora(vetor[i].Hora));
+
 
             //previsão da data de entrega
             do{
