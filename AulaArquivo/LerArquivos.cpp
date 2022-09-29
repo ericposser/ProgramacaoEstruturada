@@ -5,6 +5,12 @@
 using namespace std;
 
 string pegarDominioEmail(string email) {
+    int posicao;
+    string dominio;
+    posicao=email.find("@");
+    dominio= email.substr(posicao+1, 100);
+
+    return dominio;
 
 }
 
@@ -37,7 +43,7 @@ int main() {
 		nome = linha.substr(0, posicao);
 		email = linha.substr(posicao+1, 200);
 
-		cout << email << endl;
+		cout << pegarDominioEmail(email) << endl;
 	}
 
 	procuradorArquivo.close();
