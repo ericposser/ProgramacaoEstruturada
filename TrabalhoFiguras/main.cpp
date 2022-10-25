@@ -10,14 +10,12 @@ typedef struct {
   string codigo;
   string jogador;
   string selecao;
-  ;
 } Figura;
 
 typedef struct {
   string codigo;
   string jogador;
   string selecao;
-  
 } FiguraF;
 
 int contarLinhasArquivo(string nomeArquivo) {
