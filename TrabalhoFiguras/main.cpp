@@ -10,12 +10,14 @@ typedef struct {
   string codigo;
   string jogador;
   string selecao;
+  ;
 } Figura;
 
 typedef struct {
   string codigo;
   string jogador;
   string selecao;
+  
 } FiguraF;
 
 int contarLinhasArquivo(string nomeArquivo) {
@@ -41,6 +43,7 @@ void popularListaArquivoRepetidas(Figura *lista, string nomeArquivo) {
   ifstream procuradorLeitura;
   procuradorLeitura.open(nomeArquivo);
   string codigo, jogador, selecao;
+  bool especial;
   int i = 0;
 
   string linha;
@@ -55,11 +58,14 @@ void popularListaArquivoRepetidas(Figura *lista, string nomeArquivo) {
     codigo = linha.substr(0, posicaoPrimeiroPontoVirgula);
     jogador = linha.substr(posicaoPrimeiroPontoVirgula + 1,
                            posicaoUltimoPontoVirgula);
-    selecao = linha.substr(posicaoUltimoPontoVirgula + 1, 200);
+    selecao = linha.substr(posicaoPrimeiroPontoVirgula + 1,
+                           posicaoUltimoPontoVirgula);
+    
 
     lista[i].codigo = codigo;
     lista[i].jogador = jogador;
     lista[i].selecao = selecao;
+    
     i++;
   }
   procuradorLeitura.close();
